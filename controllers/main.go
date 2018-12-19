@@ -1,10 +1,10 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 	"todo/consts"
 	"todo/models"
-	"fmt"
 )
 
 type MainController struct {
@@ -15,7 +15,7 @@ func (c *MainController) Get() {
 	sessionUser := c.GetSession(consts.USER_KEY_IN_SESSION)
 	user, ok := sessionUser.(models.User)
 	if ok {
-		fmt.Printf("%v",user)
+		fmt.Printf("%v", user)
 		c.Data["UserName"] = user.UserName
 		c.Data["UserId"] = user.UserId
 	}

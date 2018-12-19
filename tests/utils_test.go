@@ -1,10 +1,10 @@
 package test
 
 import (
-	"testing"
 	"crypto/md5"
-	"io"
 	"fmt"
+	"io"
+	"testing"
 )
 
 func TestStr2md5(t *testing.T) {

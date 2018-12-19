@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"todo/consts"
 	"todo/models"
 	"todo/utils"
-	"todo/consts"
 )
 
 type LoginController struct {
@@ -12,8 +12,11 @@ type LoginController struct {
 
 // @router /login [get,post]
 func (c *LoginController) Login() {
-	if c.Ctx.Request.Method == "GET" {
+	if c.Ctx.Request.Method == consts.REQUEST_GET_METHOD {
 		c.TplName = consts.LOGIN_TPLName
+		//var user models.User
+		//var encrypt utils.Encrypt
+		//user.Registe("wy",encrypt.Str2md5("123"+consts.DEFAULT_SALT))
 	} else {
 		userName := c.GetString("UserName")
 		password := c.GetString("Password")

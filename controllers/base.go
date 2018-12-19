@@ -19,7 +19,7 @@ func (c *BaseController) AjaxErr(str string) {
 	c.StopRun()
 }
 
-func ajax(str string, status int) (map[string]interface{}) {
+func ajax(str string, status int) map[string]interface{} {
 	json := make(map[string]interface{})
 	json["status"] = status
 	json["msg"] = str

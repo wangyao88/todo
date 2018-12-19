@@ -1,13 +1,13 @@
 package main
 
 import (
-	_ "todo/routers"
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
-	"github.com/astaxie/beego/context"
-	_ "github.com/go-sql-driver/mysql"
 	"fmt"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
+	"github.com/astaxie/beego/orm"
+	_ "github.com/go-sql-driver/mysql"
 	"todo/consts"
+	_ "todo/routers"
 )
 
 func init() {
@@ -15,10 +15,10 @@ func init() {
 	dbPort := beego.AppConfig.String("dbPort")
 	dbUser := beego.AppConfig.String("dbUser")
 	dbPassword := beego.AppConfig.String("dbPassword")
-	dbName :=beego.AppConfig.String("dbName")
-	dsn := dbUser + ":" +dbPassword +"@tcp("+dbHost+":"+dbPort+")/"+dbName+"?charset=utf8&loc=Asia%2FShanghai"
+	dbName := beego.AppConfig.String("dbName")
+	dsn := dbUser + ":" + dbPassword + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName + "?charset=utf8&loc=Asia%2FShanghai"
 	orm.RegisterDriver(consts.MYSQL_DATABASE_DRIVERNAME, orm.DRMySQL)
-	orm.RegisterDataBase(consts.DEFAULT_DATABASE_ALIASNAME,consts.MYSQL_DATABASE_DRIVERNAME,dsn)
+	orm.RegisterDataBase(consts.DEFAULT_DATABASE_ALIASNAME, consts.MYSQL_DATABASE_DRIVERNAME, dsn)
 }
 
 var FilterLogin = func(ctx *context.Context) {
@@ -45,7 +45,6 @@ func main() {
 	autoCreateTable()
 	orm.RunCommand()
 	orm.Debug = true
-	beego.InsertFilter(consts.LOGIN_FILTER_URL,beego.BeforeRouter,FilterLogin)
+	beego.InsertFilter(consts.LOGIN_FILTER_URL, beego.BeforeRouter, FilterLogin)
 	beego.Run()
 }
-

@@ -2,12 +2,11 @@ package utils
 
 import (
 	"crypto/md5"
-	"io"
 	"fmt"
+	"io"
 )
 
 type Encrypt struct {
-
 }
 
 func (encrypt *Encrypt) Str2md5(str string) string {
