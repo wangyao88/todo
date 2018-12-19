@@ -3,13 +3,17 @@ function change() {
     $(".top").css('height', height01 - 35+"px");
 }
 
-var PROJECTID, TASKTYPE, TASKPHASE,  PERSONID
 !function () {
-    laydate.skin('danlan');//切换皮肤，请查看skins下面皮肤库
-    laydate({ elem: '#demo' });//绑定元素
-    laydate({ elem: '#demo1' });
-    laydate({ elem: '#demo2' });//绑定元素
+    laydate.skin('dahong');
+    laydate({ elem: '#CompanyInTime' });
+    laydate({ elem: '#CompanyOutTime' });
 }();
+
+$(document).ready(function () {
+    // init();
+    $("#form_company_add_save").click(saveOrUpdateCompany);
+});
+
 function init() {
     if (parent.getCurrentID() != "") {
         $.ajax({
@@ -26,14 +30,8 @@ function init() {
                     $("#tit").val(data.PROJECTNAME);
                     $("#person").val(data.TASKPHASENAME);
                     $("#part").val(data.STATE);
-
                     $("#demo").val(getFormatTime(data.STARTTIME.substring(6,19)));
-
-
                     $("#NOTE").val(data.NOTE);
-
-                    getPart();
-
                 }
                 else {
                     alert("获取失败！");
@@ -42,33 +40,26 @@ function init() {
             error: function (err) {
             }
         })
-
-    }
-    else {
-        getPart();
     }
 }
-function NoticeSave() {
+function saveOrUpdateCompany() {
+    if($("#CompanyId").val()) {
+        updateCompany();
+    } else {
+        saveCompany();
+    }
+}
+
+function saveCompany() {
     $.ajax({
         type: "POST",
-        url: "../TaskRecord/UpdateTask",
-        data: {
-            TASKID: parent.getCurrentID(),
-            PROJECTID: PROJECTID,
-            STATE: $("#tit").val(),
-            STARTTIME: $("#demo").val(),
-
-            PERSONID: PERSONID,
-            NOTE: $("#NOTE").val(),
-            TASKTYPE: $("#part").val(),
-            TASKPHASE: $("#person").val(),
-
-        },
+        url: "/company/add",
+        data: $("#form_company").serialize(),
         dataType: "json",
         success: function (result) {
-            if (result.data) {
+            if (result.status == 1) {
                 alert("保存成功！！！");
-                parent.getNoticeTableData();
+                parent.getCompanyTableData();
                 TaskCancel();
             } else {
                 alert("保存失败！！！")
@@ -76,6 +67,13 @@ function NoticeSave() {
         }
     })
 }
+
+function updateCompany() {
+
+}
+
+
+
 function TaskCancel() {
     var index = parent.layer.getFrameIndex(window.name)
     parent.layer.close(index);

@@ -18,33 +18,37 @@ function companyload() {
         contentType: "application/x-www-form-urlencoded",
         queryParams: null,
         columns: [
-
             {
-                title: "编号",
-                field: 'ID',
+                field: 'CompanyId',
+                align: 'center',
+                valign: 'middle',
+                hidden: true
+            },
+            {
+                title: '公司名称',
+                field: 'CompanyName',
                 align: 'center',
                 valign: 'middle'
             },
             {
-                title: '标题',
-                field: 'TITLE',
+                title: '担任职位',
+                field: 'CompanyJob',
                 align: 'center',
                 valign: 'middle'
             },
             {
-                title: '发布人',
-                field: 'PUBLISHER',
-                align: 'center',
-                valign: 'middle'
-            },
-            {
-                title: '发布时间',
-                field: 'PUBTIME',
+                title: '入职时间',
+                field: 'CompanyInTime',
                 align: 'center'
             },
             {
-                title: '发布内容',
-                field: 'PUBCONENT',
+                title: '离职时间',
+                field: 'CompanyOutTime',
+                align: 'center'
+            },
+            {
+                title: '公司描述',
+                field: 'CompanyDescription',
                 align: 'center'
             },
 
@@ -86,8 +90,8 @@ function getCompanyTableData() {
     })
 }
 function addCompany() {
-    openlayer()
     currentID = "";
+    openlayer()
 }
 function editCompany(id) {
     openlayer()
@@ -121,7 +125,7 @@ function openlayer() {
         shadeClose: true,
         shade: 0.5,
         skin: 'layui-layer-rim',
-        area: ['98%', '98%'],
+        area: ['98%', '90%'],
         shadeClose: true,
         closeBtn: 2,
         content: '/company/add'

@@ -18,3 +18,9 @@ type Company struct {
 func init() {
 	orm.RegisterModelWithPrefix("tb_", new(Company))
 }
+
+func (company *Company) Add() error {
+	orm := orm.NewOrm()
+	_, err := orm.Insert(company)
+	return err
+}

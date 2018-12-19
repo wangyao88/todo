@@ -16,34 +16,43 @@
         <div class="top_out">
             <table class="table" >
                 <tbody>
-                <tr>
-                    <td style="border-top: none">标题：<i class="i_start"></i> </td>
-                    <td  colspan = "6"  style="text-align: left;border-top: none"><input type="text" id="tit" name ="name" minlength="2"  required></td>
-                </tr>
-                <tr>
-                    <td>编号：<i class="i_start"></i> </td>
-                    <td  style="text-align: left"><input type="text" id="no" name ="name" minlength="2"  required></td>
-                    <td>发布人：</td>
-                    <td colspan = "3" style="text-align: left"><input type="text" class="long_text" id="person"></td>
-                </tr>
-                <tr>
-                    <td>发布时间：</td>
-                    <td  style="text-align: left"><input type="text" id="demo"></td>
-                    <td>发布部门：</td>
-                    <td colspan = "3" style="text-align: left"><select id="part">
-
-                    </select></td>
-                </tr>
-                <tr>
-                    <td style="line-height: 340px">发布内容：</td>
-                    <td colspan = "8" style="text-align: left"><textarea  id="editor" style="width: 100%;height: 240px"></textarea></td>
-                </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" id="CompanyId" name="CompanyId">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>公司名称：<i class="i_start"></i> </td>
+                        <td  style="text-align: left">
+                            <input type="text" id="CompanyName" name ="CompanyName" minlength="2"  required>
+                        </td>
+                        <td>担任职位：<i class="i_start"></i> </td>
+                        <td colspan = "3" style="text-align: left">
+                            <input type="text" class="long_text" id="CompanyJob" name="CompanyJob" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>入职时间：<i class="i_start"></i> </td>
+                        <td  style="text-align: left">
+                            <input type="text" id="CompanyInTime" name="CompanyInTime" required>
+                        </td>
+                        <td>离职时间：</td>
+                        <td  style="text-align: left">
+                            <input type="text" id="CompanyOutTime" name="CompanyOutTime">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="line-height: 340px">公司描述：<i class="i_start"></i> </td>
+                        <td colspan = "8" style="text-align: left">
+                            <textarea  id="CompanyDescription" name="CompanyDescription" style="width: 100%;height: 240px" required></textarea>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="bot_btn">
-        <input type="submit" value="保存" class="btn">
+        <input type="button" value="保存" class="btn" id="form_company_add_save">
         <button class="btn btn1"><a href="/company/list" target="right">返回</a></button>
     </div>
 </div>

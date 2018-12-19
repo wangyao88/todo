@@ -1,6 +1,10 @@
 package controllers
 
-import "todo/consts"
+import (
+	"todo/consts"
+	"todo/models"
+	"fmt"
+)
 
 type CompanyController struct {
 	BaseController
@@ -10,8 +14,23 @@ type CompanyController struct {
 func (c *CompanyController) Add() {
 	if c.Ctx.Request.Method == consts.REQUEST_GET_METHOD {
 		c.TplName = consts.COMPANY_ADD_TPLName
-	} else {
-
+		return
+	}
+	if c.Ctx.Request.Method == consts.REQUEST_POST_METHOD {
+		company := models.Company{}
+		err := c.ParseForm(&company)
+		if err != nil {
+			c.AjaxErr(fmt.Sprintf("%s",err))
+			return
+		}
+		user := c.GetSessionUser()
+		company.User = &user
+		err = company.Add()
+		if err != nil {
+			c.AjaxErr(fmt.Sprintf("%s",err))
+			return
+		}
+		c.AjaxOk("公司信息保存成功")
 	}
 }
 
