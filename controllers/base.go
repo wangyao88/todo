@@ -36,3 +36,21 @@ func ajax(str string, status int) map[string]interface{} {
 	json["msg"] = str
 	return json
 }
+
+func (c *BaseController) GetPage() *models.Page {
+	var page = new(models.Page)
+	pageNo, _ := c.GetInt("pageNo")
+	pageSize, _ := c.GetInt("pageSize")
+	page.SetPageNo(pageNo)
+	page.SetPageSize(pageSize)
+	return page
+}
+
+func (c *CompanyController) Page(page *models.Page) {
+	json := make(map[string]interface{})
+	json["total"] = page.GetTotal()
+	json["rows"] = page.GetRows()
+	c.Data["json"] = json
+	c.ServeJSON()
+	c.StopRun()
+}

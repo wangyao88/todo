@@ -3,20 +3,26 @@
     laydate({elem: '#demo'});//绑定元素
 }();
 
-var noticeTitle, Publisher, currentID, noticeTime, flag = true;
-
 function companyload() {
     $('#table').bootstrapTable({
         method: "get",
+        url: "/company/doList",
         striped: true,
         singleSelect: false,
         dataType: "json",
         pagination: true, //分页
+        sidePagination: "server",
         pageSize: 10,
         pageNumber: 1,
         search: false, //显示搜索框
-        contentType: "application/x-www-form-urlencoded",
-        queryParams: null,
+        queryParams: function(params) {
+            var temp = {
+                pageSize: params.limit,
+                pageNo: (params.offset / params.limit) + 1,
+                companyName: $("#companyName").val()
+            }
+            return temp
+        },
         columns: [
             {
                 field: 'CompanyId',
@@ -39,12 +45,21 @@ function companyload() {
             {
                 title: '入职时间',
                 field: 'CompanyInTime',
-                align: 'center'
+                align: 'center',
+                formatter: function (value, row) {
+                    return row.CompanyInTime.substr(0,10);
+                }
             },
             {
                 title: '离职时间',
                 field: 'CompanyOutTime',
-                align: 'center'
+                align: 'center',
+                formatter: function (value, row) {
+                    if(row.CompanyOutTime == "0001-01-01T00:00:00Z") {
+                        return "至今";
+                    }
+                    return row.CompanyOutTime.substr(0,10);
+                }
             },
             {
                 title: '公司描述',
@@ -57,56 +72,41 @@ function companyload() {
                 field: '',
                 align: 'center',
                 formatter: function (value, row) {
-                    var e = '<button button="#" mce_href="#" onclick="delNotice(\'' + row.WORKRECORDID + '\')">删除</button> '
-                    var d = '<button button="#" mce_href="#" onclick="editNotice(\'' + row.WORKRECORDID + '\')">编辑</button> ';
+                    var e = '<button button="#" mce_href="#" onclick="delCompany(\'' + row.CompanyId + '\')">删除</button> '
+                    var d = '<button button="#" mce_href="#" onclick="editCompany(\'' + row.CompanyId + '\')">编辑</button> ';
                     return e + d;
                 }
             }
         ]
     });
-    getCompanyTableData();
 }
+
 function getCompanyTableData() {
-    if (flag) {
-        noticeTitle = "";
-        Publisher = "";
-        noticeTime = "";
-        flag = false;
-    } else {
-        noticeTitle = $("#noticeTit").val();
-        Publisher = $("#noticePuer").val();
-        noticeTime = $("#demo").val();
-    }
-    $.ajax({
-        type: "GET",
-        url: "../WorkRecord/SearchWork?dtStart=" + noticeTitle + "&dtEnd=" + Publisher + "&dtEnd=" + noticeTime,
-        dataType: "json",
-        success: function (result) {
-            if (result.data) {
-                var NoticeTableData = result.data;
-                $('#table').bootstrapTable("load", NoticeTableData);
-            }
-        }
-    })
+    $('#table').bootstrapTable('refresh');
 }
+
 function addCompany() {
-    currentID = "";
-    openlayer()
+    var url = '/company/add'
+    openlayer(url)
 }
-function editCompany(id) {
-    openlayer()
-    currentID = id;
+
+function editCompany(CompanyId) {
+    var url = '/company/update?CompanyId='+CompanyId
+    openlayer(url)
 }
-function delCompany(id) {
-    var NoticeId = id;
+
+function delCompany(CompanyId) {
     $.ajax({
-        url: '../WorkRecord/DeleteWork?workId=' + NoticeId,
+        url: '/company/delete',
         type: 'post',
+        data: {
+            CompanyId: CompanyId
+        },
         dataType: 'json',
         success: function (data) {
             if (data.status == 1) {
                 alert("删除成功！")
-                getNoticeTableData();
+                getCompanyTableData();
             } else {
                 alert("删除失败")
             }
@@ -115,10 +115,8 @@ function delCompany(id) {
         }
     });
 }
-function getCurrentID() {
-    return currentID;
-}
-function openlayer() {
+
+function openlayer(url) {
     layer.open({
         type: 2,
         title: '公司信息',
@@ -128,9 +126,8 @@ function openlayer() {
         area: ['98%', '90%'],
         shadeClose: true,
         closeBtn: 2,
-        content: '/company/add'
+        content: url
     });
-
 }
 
 

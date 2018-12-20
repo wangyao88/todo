@@ -20,7 +20,16 @@ func init() {
         beego.ControllerComments{
             Method: "Delete",
             Router: `/company/delete`,
-            AllowHTTPMethods: []string{"get","post"},
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:CompanyController"] = append(beego.GlobalControllerRouter["todo/controllers:CompanyController"],
+        beego.ControllerComments{
+            Method: "DoList",
+            Router: `/company/doList`,
+            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
@@ -30,15 +39,6 @@ func init() {
             Method: "List",
             Router: `/company/list`,
             AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["todo/controllers:CompanyController"] = append(beego.GlobalControllerRouter["todo/controllers:CompanyController"],
-        beego.ControllerComments{
-            Method: "One",
-            Router: `/company/one`,
-            AllowHTTPMethods: []string{"get","post"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

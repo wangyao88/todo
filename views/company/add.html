@@ -18,33 +18,33 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="hidden" id="CompanyId" name="CompanyId">
+                            <input type="hidden" id="CompanyId" name="CompanyId" value="{{.Company.CompanyId}}">
                         </td>
                     </tr>
                     <tr>
                         <td>公司名称：<i class="i_start"></i> </td>
                         <td  style="text-align: left">
-                            <input type="text" id="CompanyName" name ="CompanyName" minlength="2"  required>
+                            <input type="text" id="CompanyName" name ="CompanyName" minlength="2" value="{{.Company.CompanyName}}" required>
                         </td>
                         <td>担任职位：<i class="i_start"></i> </td>
                         <td colspan = "3" style="text-align: left">
-                            <input type="text" class="long_text" id="CompanyJob" name="CompanyJob" required>
+                            <input type="text" class="long_text" id="CompanyJob" name="CompanyJob" value="{{.Company.CompanyJob}}" required>
                         </td>
                     </tr>
                     <tr>
                         <td>入职时间：<i class="i_start"></i> </td>
                         <td  style="text-align: left">
-                            <input type="text" id="CompanyInTime" name="CompanyInTime" required>
+                            <input type="text" id="CompanyInTime" name="CompanyInTime" value='{{.Company.CompanyInTime}}' required>
                         </td>
                         <td>离职时间：</td>
                         <td  style="text-align: left">
-                            <input type="text" id="CompanyOutTime" name="CompanyOutTime">
+                            <input type="text" id="CompanyOutTime" name="CompanyOutTime" value='{{.Company.CompanyOutTime}}'>
                         </td>
                     </tr>
                     <tr>
                         <td style="line-height: 340px">公司描述：<i class="i_start"></i> </td>
                         <td colspan = "8" style="text-align: left">
-                            <textarea  id="CompanyDescription" name="CompanyDescription" style="width: 100%;height: 240px" required></textarea>
+                            <textarea id="CompanyDescription" name="CompanyDescription" style="width: 100%;height: 240px" required>{{.Company.CompanyDescription}}</textarea>
                         </td>
                     </tr>
                 </tbody>
