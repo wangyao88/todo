@@ -36,7 +36,7 @@ func (company *Company) List(page *Page, companyName string, userId int) *Page {
 	companyTable := new(Company)
 	querySeter := orm.QueryTable(&companyTable)
 	if companyName != "" {
-		querySeter = querySeter.Filter("CompanyName__icontains", companyName).Filter("User__UserId", userId)
+		querySeter = querySeter.Filter("CompanyName__icontains", companyName)
 	}
 	querySeter = querySeter.Filter("User__UserId", userId)
 	var resultPage = new(Page)
@@ -61,4 +61,12 @@ func (company *Company) One(CompanyId int) *Company {
 	var companyResult = new(Company)
 	orm.QueryTable(&companyTable).Filter("CompanyId", CompanyId).One(companyResult)
 	return companyResult
+}
+
+func (company *Company) SimpleList(userId int) []*Company {
+	orm := orm.NewOrm()
+	companyTable := new(Company)
+	var results []*Company
+	orm.QueryTable(&companyTable).Filter("User__UserId", userId).All(&results, "CompanyId" ,"CompanyName")
+	return results
 }

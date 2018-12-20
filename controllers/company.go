@@ -76,9 +76,7 @@ func (c *CompanyController) Update() {
 
 // @router /company/list [get]
 func (c *CompanyController) List() {
-	if c.Ctx.Request.Method == consts.REQUEST_GET_METHOD {
-		c.TplName = consts.COMPANY_INDEX_TPLName
-	}
+	c.TplName = consts.COMPANY_INDEX_TPLName
 }
 
 // @router /company/doList [get]
@@ -90,4 +88,3 @@ func (c *CompanyController) DoList() {
 	resultPage := company.List(page, companyName, userId)
 	c.Page(resultPage)
 }
-

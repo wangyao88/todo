@@ -15,8 +15,15 @@ func (c *BaseController) AjaxOk(str string) {
 	c.ServeJSON()
 	c.StopRun()
 }
+
 func (c *BaseController) AjaxErr(str string) {
 	c.Data["json"] = ajax(str, 0)
+	c.ServeJSON()
+	c.StopRun()
+}
+
+func (c *BaseController) AjaxData(data interface{}) {
+	c.Data["json"] = data
 	c.ServeJSON()
 	c.StopRun()
 }
@@ -46,7 +53,7 @@ func (c *BaseController) GetPage() *models.Page {
 	return page
 }
 
-func (c *CompanyController) Page(page *models.Page) {
+func (c *BaseController) Page(page *models.Page) {
 	json := make(map[string]interface{})
 	json["total"] = page.GetTotal()
 	json["rows"] = page.GetRows()

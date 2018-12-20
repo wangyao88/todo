@@ -11,4 +11,7 @@ const (
 	COMPANY_INDEX_TPLName  = "company/list.html"
 	COMPANY_ADD_TPLName    = "company/add.html"
 	COMPANY_UPDATE_TPLName = "company/update.html"
+	PROJECT_INDEX_TPLName  = "project/list.html"
+	PROJECT_ADD_TPLName    = "project/add.html"
+	PROJECT_UPDATE_TPLName = "project/update.html"
 )
