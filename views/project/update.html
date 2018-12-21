@@ -30,7 +30,8 @@
                     <tr>
                         <td>公司名称：<i class="i_start"></i> </td>
                         <td colspan = "4" style="text-align: left">
-                            <select id="Company_CompanyId" class="form-control" name="Company.CompanyId" value="{{.Project.Company.CompanyId}}">
+                            <input type="hidden" id="companyId" value="{{.Project.Company.CompanyId}}">
+                            <select id="selectCompanyId" class="form-control" name="Company.CompanyId">
                                 <option>请选择公司</option>
                             {{range $index, $Company := .Companys}}
                                 <option value="{{$Company.CompanyId}}">{{$Company.CompanyName}}</option>
@@ -74,9 +75,4 @@
 <script src="/static/js/comm/jquery-validation-1.14.0/localization/messages_zh.js" charset="utf-8" type="text/javascript"></script>
 <script src="/static/js/comm/date/laydate.js" type="text/javascript"></script>
 <script src="/static/js/project/project_add.js" type="text/javascript"></script>
-<script>
-    var companyId = $("Company_CompanyId").val()
-    alert(companyId);
-    $("#Company_CompanyId option[value='"+companyId+"']").attr("selected",true);
-</script>
 </html>

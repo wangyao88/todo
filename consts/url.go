@@ -14,4 +14,7 @@ const (
 	PROJECT_INDEX_TPLName  = "project/list.html"
 	PROJECT_ADD_TPLName    = "project/add.html"
 	PROJECT_UPDATE_TPLName = "project/update.html"
+	WORKLOG_INDEX_TPLName  = "worklog/list.html"
+	WORKLOG_ADD_TPLName    = "worklog/add.html"
+	WORKLOG_UPDATE_TPLName = "worklog/update.html"
 )

@@ -9,10 +9,10 @@ function change() {
     laydate({ elem: '#ProjectEndTime' });
 }();
 
-$(document).ready(function () {
+$(document).ready(function() {
     $("#form_project_add_save").click(saveOrUpdateProject);
-    var companyId = $("Company_CompanyId").val()
-    $("#Company_CompanyId option[value='"+companyId+"']").attr("selected",true);
+    var companyId = $("#companyId").val();
+    $("#selectCompanyId option[value='"+companyId+"']").attr("selected",true);
 });
 
 function saveOrUpdateProject() {

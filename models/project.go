@@ -63,3 +63,11 @@ func (project *Project) One(ProjectId int) *Project {
 	orm.QueryTable(&projectTable).Filter("ProjectId", ProjectId).One(projectResult)
 	return projectResult
 }
+
+func (project *Project) SimpleList(userId int) []*Project {
+	orm := orm.NewOrm()
+	projectTable := new(Project)
+	var results []*Project
+	orm.QueryTable(&projectTable).Filter("User__UserId", userId).All(&results, "ProjectId" ,"ProjectName")
+	return results
+}
