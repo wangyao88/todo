@@ -14,4 +14,6 @@ func init() {
 	beego.Include(&controllers.WorkLogController{})
 	beego.Include(&controllers.TodoController{})
 	beego.Include(&controllers.LeaveController{})
+	beego.Include(&controllers.WebsiteController{})
+	beego.Include(&controllers.CalendarController{})
 }

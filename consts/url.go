@@ -24,4 +24,6 @@ const (
 	LEAVE_INDEX_TPLName    = "leave/list.html"
 	LEAVE_ADD_TPLName      = "leave/add.html"
 	LEAVE_UPDATE_TPLName   = "leave/update.html"
+	WEBSITE_INDEX_TPLName  = "website/list.html"
+	CALENDAR_INDEX_TPLName = "calendar/list.html"
 )
