@@ -135,6 +135,15 @@ func init() {
 
     beego.GlobalControllerRouter["todo/controllers:WorkLogController"] = append(beego.GlobalControllerRouter["todo/controllers:WorkLogController"],
         beego.ControllerComments{
+            Method: "Detail",
+            Router: `/workLog/detail`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:WorkLogController"] = append(beego.GlobalControllerRouter["todo/controllers:WorkLogController"],
+        beego.ControllerComments{
             Method: "DoList",
             Router: `/workLog/doList`,
             AllowHTTPMethods: []string{"get"},

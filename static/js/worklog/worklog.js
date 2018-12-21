@@ -88,7 +88,7 @@ function editWorkLog(WorkLogId) {
     openlayer(url)
 }
 
-function detailWorkLog() {
+function detailWorkLog(WorkLogId) {
     var url = '/workLog/detail?WorkLogId='+WorkLogId
     openlayer(url)
 }

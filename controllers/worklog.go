@@ -84,6 +84,17 @@ func (c *WorkLogController) Update() {
 	}
 }
 
+// @router /workLog/detail [get]
+func (c *WorkLogController) Detail() {
+	WorkLogId, err := c.GetInt("WorkLogId")
+	if err == nil && WorkLogId > 0 {
+		workLog := new(models.WorkLog)
+		one := workLog.One(WorkLogId)
+		c.Data["WorkLog"] = one
+	}
+	c.TplName = consts.WORKLOG_DETAILTPLName
+}
+
 // @router /workLog/list [get]
 func (c *WorkLogController) List() {
 	setProjectForSelect(c)

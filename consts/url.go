@@ -17,4 +17,5 @@ const (
 	WORKLOG_INDEX_TPLName  = "worklog/list.html"
 	WORKLOG_ADD_TPLName    = "worklog/add.html"
 	WORKLOG_UPDATE_TPLName = "worklog/update.html"
+	WORKLOG_DETAILTPLName = "worklog/detail.html"
 )

@@ -49,7 +49,7 @@ func (workLog *WorkLog) List(page *Page, workLogTitle string, workLogContent str
 	total, _ := querySeter.Count()
 	resultPage.SetTotal(int(total))
 	var results []*WorkLog
-	querySeter.Limit(page.pageSize, page.GetOffset()).RelatedSel().All(&results)
+	querySeter.Limit(page.pageSize, page.GetOffset()).RelatedSel().All(&results,"WorkLogId", "WorkLogTitle", "WorkLogCreateTime", "WorkLogUpdateTime", "Project")
 	resultPage.SetRows(results)
 	return resultPage
 }
