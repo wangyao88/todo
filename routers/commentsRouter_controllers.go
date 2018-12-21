@@ -52,6 +52,51 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["todo/controllers:LeaveController"] = append(beego.GlobalControllerRouter["todo/controllers:LeaveController"],
+        beego.ControllerComments{
+            Method: "Add",
+            Router: `/leave/add`,
+            AllowHTTPMethods: []string{"get","post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:LeaveController"] = append(beego.GlobalControllerRouter["todo/controllers:LeaveController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: `/leave/delete`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:LeaveController"] = append(beego.GlobalControllerRouter["todo/controllers:LeaveController"],
+        beego.ControllerComments{
+            Method: "DoList",
+            Router: `/leave/doList`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:LeaveController"] = append(beego.GlobalControllerRouter["todo/controllers:LeaveController"],
+        beego.ControllerComments{
+            Method: "List",
+            Router: `/leave/list`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:LeaveController"] = append(beego.GlobalControllerRouter["todo/controllers:LeaveController"],
+        beego.ControllerComments{
+            Method: "Update",
+            Router: `/leave/update`,
+            AllowHTTPMethods: []string{"get","post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["todo/controllers:LoginController"] = append(beego.GlobalControllerRouter["todo/controllers:LoginController"],
         beego.ControllerComments{
             Method: "Login",

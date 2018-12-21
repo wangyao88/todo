@@ -21,4 +21,7 @@ const (
 	TODO_INDEX_TPLName     = "todo/list.html"
 	TODO_ADD_TPLName       = "todo/add.html"
 	TODO_UPDATE_TPLName    = "todo/update.html"
+	LEAVE_INDEX_TPLName    = "leave/list.html"
+	LEAVE_ADD_TPLName      = "leave/add.html"
+	LEAVE_UPDATE_TPLName   = "leave/update.html"
 )
