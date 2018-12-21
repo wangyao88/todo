@@ -27,6 +27,7 @@ function workLogload() {
         },
         columns: [
             {
+                title: '编号',
                 field: 'WorkLogId',
                 align: 'center',
                 valign: 'middle',

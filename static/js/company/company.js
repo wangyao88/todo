@@ -25,6 +25,7 @@ function companyload() {
         },
         columns: [
             {
+                title: '编号',
                 field: 'CompanyId',
                 align: 'center',
                 valign: 'middle',

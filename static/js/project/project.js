@@ -25,6 +25,7 @@ function projectload() {
         },
         columns: [
             {
+                title: '编号',
                 field: 'ProjectId',
                 align: 'center',
                 valign: 'middle',

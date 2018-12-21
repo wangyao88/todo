@@ -12,4 +12,5 @@ func init() {
 	beego.Include(&controllers.CompanyController{})
 	beego.Include(&controllers.ProjectController{})
 	beego.Include(&controllers.WorkLogController{})
+	beego.Include(&controllers.TodoController{})
 }

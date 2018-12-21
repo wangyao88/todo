@@ -115,6 +115,51 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["todo/controllers:TodoController"] = append(beego.GlobalControllerRouter["todo/controllers:TodoController"],
+        beego.ControllerComments{
+            Method: "Add",
+            Router: `/todo/add`,
+            AllowHTTPMethods: []string{"get","post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:TodoController"] = append(beego.GlobalControllerRouter["todo/controllers:TodoController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: `/todo/delete`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:TodoController"] = append(beego.GlobalControllerRouter["todo/controllers:TodoController"],
+        beego.ControllerComments{
+            Method: "DoList",
+            Router: `/todo/doList`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:TodoController"] = append(beego.GlobalControllerRouter["todo/controllers:TodoController"],
+        beego.ControllerComments{
+            Method: "List",
+            Router: `/todo/list`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["todo/controllers:TodoController"] = append(beego.GlobalControllerRouter["todo/controllers:TodoController"],
+        beego.ControllerComments{
+            Method: "Update",
+            Router: `/todo/update`,
+            AllowHTTPMethods: []string{"get","post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["todo/controllers:WorkLogController"] = append(beego.GlobalControllerRouter["todo/controllers:WorkLogController"],
         beego.ControllerComments{
             Method: "Add",
