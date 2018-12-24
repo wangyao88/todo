@@ -8,6 +8,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"todo/consts"
 	_ "todo/routers"
+	"todo/models"
 )
 
 func init() {
@@ -41,7 +42,13 @@ func autoCreateTable() {
 	}
 }
 
+func setTotalTicker()  {
+	news := models.News{}
+	news.SetTotalTicker()
+}
+
 func main() {
+	go setTotalTicker()
 	autoCreateTable()
 	orm.RunCommand()
 	orm.Debug = true

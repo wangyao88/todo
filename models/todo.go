@@ -32,7 +32,7 @@ func (todo *Todo) Update() error {
 	return err
 }
 
-func (todo *Todo) List(page *Page, todoTitle string, todoContent string, todoStartTime string, todoEndTime string, userId int) *Page {
+func (todo *Todo) List(page *Page, todoTitle string, todoContent string, todoStartTime string, todoEndTime string, listType string, userId int) *Page {
 	orm := orm.NewOrm()
 	todoTable := new(Todo)
 	querySeter := orm.QueryTable(&todoTable)
@@ -48,6 +48,14 @@ func (todo *Todo) List(page *Page, todoTitle string, todoContent string, todoSta
 	if todoEndTime != "" {
 		querySeter = querySeter.Filter("TodoCreateTime__lte", todoEndTime)
 	}
+	if listType != "" {
+		if listType == "todo" {
+			querySeter = querySeter.Filter("TodoRealyEndTime__isnull", true)
+		}
+		if listType == "unTodo" {
+			querySeter = querySeter.Filter("TodoRealyEndTime__isnull", false).Filter("TodoRealyEndTime",getNowDate())
+		}
+	}
 	//time.Parse("01/02/2006", "02/08/2015")
 	querySeter = querySeter.Filter("User__UserId", userId)
 	var resultPage = new(Page)
@@ -57,6 +65,33 @@ func (todo *Todo) List(page *Page, todoTitle string, todoContent string, todoSta
 	querySeter.Limit(page.pageSize, page.GetOffset()).All(&results)
 	resultPage.SetRows(results)
 	return resultPage
+}
+
+func (todo *Todo) ListForTodo(userId int) []*Todo {
+	orm := orm.NewOrm()
+	todoTable := new(Todo)
+	querySeter := orm.QueryTable(&todoTable)
+	querySeter = querySeter.Filter("TodoRealyEndTime__isnull", true).Filter("User__UserId", userId)
+	var results []*Todo
+	querySeter.Limit(5).All(&results,"TodoId","TodoTitle","TodoContent")
+	return results
+}
+
+func (todo *Todo) ListForUnTodo(userId int) []*Todo {
+	orm := orm.NewOrm()
+	todoTable := new(Todo)
+	querySeter := orm.QueryTable(&todoTable)
+	querySeter = querySeter.Filter("TodoRealyEndTime__isnull", false).Filter("TodoRealyEndTime",getNowDate()).Filter("User__UserId", userId)
+	var results []*Todo
+	querySeter.Limit(5).All(&results,"TodoId","TodoTitle","TodoContent")
+	return results
+}
+
+func getNowDate() string {
+	year := time.Now().Format("2006")
+	month := time.Now().Format("01")
+	day := time.Now().Format("02")
+	return year + "-" + month + "-" + day;
 }
 
 func (todo *Todo) Delete(TodoId int) error {

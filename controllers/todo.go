@@ -86,8 +86,9 @@ func (c *TodoController) DoList() {
 	todoContent := c.GetString("todoContent")
 	todoStartTime := c.GetString("todoStartTime")
 	todoEndTime := c.GetString("todoEndTime")
+	listType := c.GetString("listType")
 	userId := c.GetSessionUser().UserId
 	todo := new(models.Todo)
-	resultPage := todo.List(page, todoTitle, todoContent, todoStartTime, todoEndTime, userId)
+	resultPage := todo.List(page, todoTitle, todoContent, todoStartTime, todoEndTime,listType, userId)
 	c.Page(resultPage)
 }

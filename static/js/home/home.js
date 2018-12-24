@@ -20,6 +20,75 @@ function openlayer(id){
     });
 }
 
+function newsLoad() {
+    $.ajax({
+        type: "get",
+        url: "/news/list",
+        dataType: "json",
+        success: function (result) {
+            var html = "";
+            $.each(result, function(index, item){
+                html += '<li class="ue-clear">'+
+                            '<a href="'+item.NewsUrl+'" target="_blank" class="notice-title">'+item.NewsTitle+'</a>'+
+                            '<div class="notice-time">'+item.NewsDate+'</div>'+
+                        '</li>';
+            });
+            $("#newsUL").html(html);
+        }
+    })
+}
+
+function workLogLoad() {
+    $('#workLogTable').bootstrapTable({
+        method: "get",
+        url: "/workLog/doList",
+        striped: true,
+        singleSelect: false,
+        dataType: "json",
+        pagination: true,
+        sidePagination: "server",
+        pageSize: 10,
+        pageNumber: 1,
+        search: false,
+        queryParams: function(params) {
+            var temp = {
+                pageSize: params.limit,
+                pageNo: (params.offset / params.limit) + 1,
+                projectId: -1
+            }
+            return temp
+        },
+        columns: [
+            {
+                title: '编号',
+                field: 'WorkLogId',
+                align: 'center',
+                valign: 'middle',
+                hidden: true
+            },
+            {
+                title: '工作日志名称',
+                field: 'WorkLogTitle',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: '项目名称',
+                field: 'Project.ProjectName',
+                align: 'center'
+            },
+            {
+                title: '记录时间',
+                field: 'WorkLogCreateTime',
+                align: 'center',
+                formatter: function (value, row) {
+                    return row.WorkLogCreateTime.substr(0,10);
+                }
+            }
+        ]
+    });
+}
+
 function projectLoad() {
     $('#projectTable').bootstrapTable({
         method: "get",
@@ -36,8 +105,7 @@ function projectLoad() {
         queryParams: function(params) {
             var temp = {
                 pageSize: params.limit,
-                pageNo: (params.offset / params.limit) + 1,
-                projectName: $("#projectName").val()
+                pageNo: (params.offset / params.limit) + 1
             }
             return temp
         },
@@ -79,6 +147,8 @@ function projectLoad() {
 }
 
 function tableLoad() {
+    newsLoad();
+    workLogLoad();
     projectLoad();
 }
 
