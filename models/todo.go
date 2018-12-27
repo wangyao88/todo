@@ -62,7 +62,7 @@ func (todo *Todo) List(page *Page, todoTitle string, todoContent string, todoSta
 	total, _ := querySeter.Count()
 	resultPage.SetTotal(int(total))
 	var results []*Todo
-	querySeter.Limit(page.pageSize, page.GetOffset()).All(&results)
+	querySeter.OrderBy("-TodoCreateTime").Limit(page.pageSize, page.GetOffset()).All(&results)
 	resultPage.SetRows(results)
 	return resultPage
 }
