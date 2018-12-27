@@ -47,8 +47,9 @@ function workLogLoad() {
         dataType: "json",
         pagination: true,
         sidePagination: "server",
-        pageSize: 10,
+        pageSize: 3,
         pageNumber: 1,
+        pageList: [3, 10, 50, 100],
         search: false,
         queryParams: function(params) {
             var temp = {
